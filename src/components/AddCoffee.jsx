@@ -5,15 +5,23 @@ const AddCoffee = () => {
     e.preventDefault();
     const form = e.target;
 
-    const name = form.name.value;
-    const chef = form.chef.value;
-    const supplier = form.supplier.value;
-    const taste = form.taste.value;
-    const category = form.category.value;
-    const details = form.details.value;
-    const photo = form.photo.value;
+    // get form data
+    const formData = new FormData(form);
+    const newCoffee = Object.fromEntries(formData.entries());
+    console.log(newCoffee);
 
-    console.log({ name, chef, supplier, taste, category, details, photo });
+    // send form data to db
+    fetch("http://localhost:3000/coffees", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
   return (
     <div>
@@ -39,12 +47,12 @@ const AddCoffee = () => {
               />
             </fieldset>
             <fieldset>
-              <legend className="fieldset-legend text-xl">Chef:</legend>
+              <legend className="fieldset-legend text-xl">Quantity:</legend>
               <input
                 type="text"
                 className="input border-2 rounded w-full"
-                placeholder="Enter Chef name"
-                name="chef"
+                placeholder="Enter quantity amount"
+                name="quantity"
               />
             </fieldset>
             <fieldset>
