@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee }) => {
@@ -49,7 +50,9 @@ const CoffeeCard = ({ coffee }) => {
       </div>
       <div className="card-actions justify-end">
         <div className="join join-vertical space-y-2">
-          <button className="btn join-item rounded">View</button>
+          <Link to={`/coffees/${_id}`}>
+            <button className="btn join-item rounded">View</button>
+          </Link>
           <button className="btn join-item rounded">Edit</button>
           <button
             onClick={() => handleDelete(_id)}
