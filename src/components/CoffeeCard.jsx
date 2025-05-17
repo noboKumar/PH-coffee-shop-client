@@ -16,11 +16,21 @@ const CoffeeCard = ({ coffee }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your Coffee has been deleted.",
-          icon: "success",
-        });
+        // delete the coffee from db
+        fetch(`http://localhost:3000/coffees/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("after delete data", data);
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Coffee has been deleted.",
+                icon: "success",
+              });
+            }
+          });
       }
     });
   };
@@ -41,7 +51,12 @@ const CoffeeCard = ({ coffee }) => {
         <div className="join join-vertical space-y-2">
           <button className="btn join-item rounded">View</button>
           <button className="btn join-item rounded">Edit</button>
-          <button onClick={()=>handleDelete(_id)} className="btn join-item rounded">Delete</button>
+          <button
+            onClick={() => handleDelete(_id)}
+            className="btn join-item rounded"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
