@@ -3,6 +3,7 @@ import MainLayout from "../layouts/mainLayout";
 import Home from "../components/Home";
 import AddCoffee from "../components/AddCoffee";
 import UpdateCoffee from "../components/UpdateCoffee";
+import Loading from "../components/Loading";
 
 export const router = createBrowserRouter([
   {
@@ -11,6 +12,8 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: () => fetch("http://localhost:3000/coffees"),
+        hydrateFallbackElement: <Loading></Loading>,
         Component: Home,
       },
       {
