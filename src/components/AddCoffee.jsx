@@ -49,7 +49,7 @@ const AddCoffee = () => {
             <fieldset>
               <legend className="fieldset-legend text-xl">Quantity:</legend>
               <input
-                type="text"
+                type="number"
                 className="input border-2 rounded w-full"
                 placeholder="Enter quantity amount"
                 name="quantity"
@@ -74,12 +74,12 @@ const AddCoffee = () => {
               />
             </fieldset>
             <fieldset>
-              <legend className="fieldset-legend text-xl">Category:</legend>
+              <legend className="fieldset-legend text-xl">Price:</legend>
               <input
-                type="text"
+                type="number"
                 className="input border-2 rounded w-full"
-                placeholder="Enter Coffee Category"
-                name="category"
+                placeholder="Enter Coffee price"
+                name="price"
               />
             </fieldset>
             <fieldset>
