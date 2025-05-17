@@ -53,7 +53,9 @@ const CoffeeCard = ({ coffee }) => {
           <Link to={`/coffees/${_id}`}>
             <button className="btn join-item rounded">View</button>
           </Link>
-          <button className="btn join-item rounded">Edit</button>
+          <Link to={`/updateCoffee/${_id}`}>
+            <button className="btn join-item rounded">Edit</button>
+          </Link>
           <button
             onClick={() => handleDelete(_id)}
             className="btn join-item rounded"
