@@ -46,7 +46,7 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
   return (
     <div className="card card-side bg-base-100 border-2 rounded-2xl px-12 py-6 justify-between items-center shadow">
       <figure>
-        <img className="rounded-2xl" src={photo} alt="coffee-photo" />
+        <img className="rounded-2xl w-[200px] px-2" src={photo} alt="coffee-photo" />
       </figure>
       <div className="space-y-5">
         <h2 className="card-title text-2xl">Name: {name}</h2>

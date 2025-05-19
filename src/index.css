@@ -2,3 +2,6 @@
 @plugin "daisyui" {
   themes: light;
 }
+.active{
+  @apply bg-base-200
+}
