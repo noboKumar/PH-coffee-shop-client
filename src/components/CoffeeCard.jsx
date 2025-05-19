@@ -18,9 +18,12 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         // delete the coffee from db
-        fetch(`http://localhost:3000/coffees/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://coffee-shop-server-plum-theta.vercel.app/coffees/${_id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log("after delete data", data);

@@ -12,7 +12,7 @@ const AddCoffee = () => {
     console.log(newCoffee);
 
     // send form data to db
-    fetch("http://localhost:3000/coffees", {
+    fetch("https://coffee-shop-server-plum-theta.vercel.app/coffees", {
       method: "POST",
       headers: {
         "content-type": "application/json",
