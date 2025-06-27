@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/fiber": "^9.1.2",
     "firebase": "^11.7.3",
+    "framer-motion": "^12.19.2",
+    "gsap": "^3.13.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.6.0",
     "sweetalert2": "^11.21.1",
-    "tailwindcss": "^4.1.7"
+    "tailwindcss": "^4.1.7",
+    "three": "^0.177.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
