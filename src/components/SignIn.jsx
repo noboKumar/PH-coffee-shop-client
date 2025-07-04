@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
+  const { logIn } = useContext(AuthContext);
+
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    logIn(email, password)
+      .then((result) => {
+        Swal.fire({
+          title: `welcome, My friend`,
+          text: "Successfully Logged In",
+          icon: "success",
+        });
+        console.log(result);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.code}`,
+        });
+      });
+  };
 
   return (
     <div className="my-20">
       <form
+        onSubmit={handleLogIn}
         className="mx-auto fieldset bg-base-200 border-base-300 w-xs border px-12 py-6 shadow space-y-2 rounded-2xl"
       >
         <h1 className="text-4xl font-semibold">Sign In Now!</h1>

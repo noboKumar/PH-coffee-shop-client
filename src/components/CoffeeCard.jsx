@@ -70,7 +70,7 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
                 text="view"
                 disabled={false}
                 speed={3}
-                className="custom-class border px-4 py-2 rounded text-xl"
+                className=" border px-4 py-2 rounded text-xl"
               />
             </Link>
             <Link to={`/updateCoffee/${_id}`}>
@@ -78,19 +78,27 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
                 text="Edit"
                 disabled={false}
                 speed={3}
-                className="custom-class border px-4 py-2 rounded text-xl"
+                className="border px-4 py-2 rounded text-xl"
               />
             </Link>
-            <button onClick={() => handleDelete(_id)}>
+            <button className="bg-red-900 rounded" onClick={() => handleDelete(_id)}>
               <ShinyText
                 text="Delete"
                 disabled={false}
                 speed={3}
-                className="custom-class border px-4 py-2 rounded text-xl"
+                className="border px-4 py-2 rounded text-xl"
               />
             </button>
           </div>
         </div>
+        <button className="cursor-pointer bg-gray-900">
+          <ShinyText
+            text="Buy Now"
+            disabled={false}
+            speed={3}
+            className="border px-4 py-2 rounded text-xl"
+          />
+        </button>
       </div>
     </SpotlightCard>
   );

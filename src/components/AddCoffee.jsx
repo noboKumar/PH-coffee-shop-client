@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
 
 const AddCoffee = () => {
-  
-  const handleSubmitForm = (e) => {
+  const [image, setImage] = useState(null);
+
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -11,6 +12,24 @@ const AddCoffee = () => {
     const formData = new FormData(form);
     const newCoffee = Object.fromEntries(formData.entries());
     console.log(newCoffee);
+
+    // Upload image to ImgBB
+    formData.append("image", image);
+    console.log(image);
+
+    const imgRes = await fetch(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const imgData = await imgRes.json();
+    console.log(imgData);
+
+    const imageUrl = imgData.data.url;
+    newCoffee.photo = imageUrl;
 
     // send form data to db
     fetch("https://coffee-shop-server-plum-theta.vercel.app/coffees", {
@@ -104,14 +123,14 @@ const AddCoffee = () => {
           <fieldset>
             <legend className="fieldset-legend text-xl">Photo:</legend>
             <input
-              type="text"
-              className="input border-2 rounded w-full"
-              placeholder="Enter Photo URL"
+              onChange={(e) => setImage(e.target.files[0])}
+              type="file"
+              className="input border-2 rounded w-full file-input"
               name="photo"
             />
           </fieldset>
           <input
-            className="btn rounded bg-[#D2B48C] border-[#331A15] w-full my-6"
+            className="btn rounded bg-[#D2B48C] text-black w-full my-6"
             type="submit"
             value="Add Coffee"
           />

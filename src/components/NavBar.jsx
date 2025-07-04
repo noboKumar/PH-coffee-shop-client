@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 const NavBar = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
+
   const navBarLinks = (
     <>
       <li>
@@ -46,10 +50,10 @@ const NavBar = () => {
         <Link className="btn btn-ghost text-xl">Coffee Shop</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navBarLinks}</ul>
+        <ul className="menu menu-horizontal px-1 text-xl">{navBarLinks}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <a className="btn">{user?.email}</a>
       </div>
     </div>
   );
