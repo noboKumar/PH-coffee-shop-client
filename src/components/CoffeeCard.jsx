@@ -13,6 +13,20 @@ import {
 const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
   const { photo, name, quantity, supplier, price, _id } = coffee;
   const [isOpen, setIsOpen] = useState(false);
+  const [quantityValue, setQuantityValue] = useState(1);
+  const totalBill = price * quantityValue;
+
+  const handleIncrement = () => {
+    if (quantityValue < quantity) {
+      setQuantityValue((prev) => prev + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantityValue > 1) {
+      setQuantityValue((prev) => (prev -= 1));
+    }
+  };
 
   const handleDelete = (id) => {
     console.log(id);
@@ -124,14 +138,41 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
               Confirm Your Purchase
             </DialogTitle>
             <Description>
-              You're about to complete your coffee order
+              You're about to complete your "{name}" order
             </Description>
             <p>
               Please confirm your payment to proceed with the order. Once
               confirmed, your fresh coffee will be on its way!
             </p>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleDecrement}
+                className="px-3 py-1 border rounded"
+              >
+                −
+              </button>
+              <input
+                min={1}
+                max={quantity}
+                value={quantityValue}
+                className="border rounded px-5 py-2"
+                type="number"
+                name="quantity"
+                onChange={(e) => setQuantityValue(Number(e.target.value))}
+              />
+              <button
+                type="button"
+                onClick={handleIncrement}
+                className="px-3 py-1 border rounded"
+              >
+                +
+              </button>
+            </div>
             <div className="flex gap-4 py-4">
-              <button className="btn bg-green-800 px-10">Pay</button>
+              <button className="btn bg-green-800 px-10">
+                Pay ${totalBill}
+              </button>
               <button
                 className="btn bg-red-800"
                 onClick={() => setIsOpen(false)}

@@ -8,15 +8,20 @@ const AddCoffee = () => {
     e.preventDefault();
     const form = e.target;
 
-    // get form data
+    // get form data:
     const formData = new FormData(form);
     const newCoffee = Object.fromEntries(formData.entries());
+
+    // convert price and quantity to number
+    newCoffee.price = Number(newCoffee.price);
+    newCoffee.quantity = Number(newCoffee.quantity);
     console.log(newCoffee);
 
-    // Upload image to ImgBB
+    // Upload image to ImgBB:
     formData.append("image", image);
     console.log(image);
 
+    // send image to imgbb:
     const imgRes = await fetch(
       `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`,
       {
@@ -25,6 +30,7 @@ const AddCoffee = () => {
       }
     );
 
+    // get image url from imgbb:
     const imgData = await imgRes.json();
     console.log(imgData);
 
