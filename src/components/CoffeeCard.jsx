@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 import SpotlightCard from "./UI/SpotlightCard";
 import ShinyText from "./UI/ShinyText";
+import {
+  Description,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
 
 const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
   const { photo, name, quantity, supplier, price, _id } = coffee;
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = (id) => {
     console.log(id);
@@ -81,7 +88,10 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
                 className="border px-4 py-2 rounded text-xl"
               />
             </Link>
-            <button className="bg-red-900 rounded" onClick={() => handleDelete(_id)}>
+            <button
+              className="bg-red-900 rounded"
+              onClick={() => handleDelete(_id)}
+            >
               <ShinyText
                 text="Delete"
                 disabled={false}
@@ -91,7 +101,10 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
             </button>
           </div>
         </div>
-        <button className="cursor-pointer bg-gray-900">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="cursor-pointer bg-gray-900"
+        >
           <ShinyText
             text="Buy Now"
             disabled={false}
@@ -100,6 +113,35 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
           />
         </button>
       </div>
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="relative z-50"
+      >
+        <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
+          <DialogPanel className="max-w-lg space-y-4 border bg-base-300 rounded-2xl text-lg p-12 shadow-xl">
+            <DialogTitle className="font-bold text-2xl">
+              Confirm Your Purchase
+            </DialogTitle>
+            <Description>
+              You're about to complete your coffee order
+            </Description>
+            <p>
+              Please confirm your payment to proceed with the order. Once
+              confirmed, your fresh coffee will be on its way!
+            </p>
+            <div className="flex gap-4 py-4">
+              <button className="btn bg-green-800 px-10">Pay</button>
+              <button
+                className="btn bg-red-800"
+                onClick={() => setIsOpen(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </DialogPanel>
+        </div>
+      </Dialog>
     </SpotlightCard>
   );
 };
