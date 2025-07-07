@@ -52,10 +52,10 @@ const NavBar = () => {
           {navBarLinks}
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end space-x-4">
         {user && user.email ? (
           <>
-            <p className="text-sm">{user?.displayName}</p>
+            <p className="text-lg font-semibold">{user?.displayName}</p>
             <button
               onClick={() => logOut()}
               className="inline-flex items-center btn"

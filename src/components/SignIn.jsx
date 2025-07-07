@@ -2,9 +2,29 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import { FcGoogle } from "react-icons/fc";
 
 const SignIn = () => {
-  const { logIn } = useContext(AuthContext);
+  const { logIn, googleLogIn } = useContext(AuthContext);
+
+  const handleGoogleLogIn = () => {
+    googleLogIn()
+      .then((result) => {
+        Swal.fire({
+          title: `welcome, My friend`,
+          text: "Successfully Logged In",
+          icon: "success",
+        });
+        console.log(result);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.code}`,
+        });
+      });
+  };
 
   const handleLogIn = (e) => {
     e.preventDefault();
@@ -63,6 +83,16 @@ const SignIn = () => {
           Sign in
         </button>
       </form>
+      <div className="divider max-w-xl mx-auto">OR</div>
+      <div className="mx-auto max-w-xl text-center">
+        <button
+          onClick={handleGoogleLogIn}
+          className="btn btn-outline btn-primary"
+        >
+          <FcGoogle className="text-2xl" />
+          Sign in with Google
+        </button>
+      </div>
     </div>
   );
 };
