@@ -75,12 +75,12 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
       <div className="card rounded-2xl px-5 py-6 justify-between items-center">
         <figure>
           <img
-            className="rounded-2xl w-full h-[200px] object-cover px-2"
+            className="rounded-2xl w-[300px] h-[200px] object-cover object-center"
             src={photo}
             alt="coffee-photo"
           />
         </figure>
-        <div className="space-y-5">
+        <div className="space-y-5 py-5">
           <h2 className="card-title text-2xl">Name: {name}</h2>
           <div className="text-xl space-y-2">
             <p>Supplier: {supplier}</p>
