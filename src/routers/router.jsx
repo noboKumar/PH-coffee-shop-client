@@ -15,8 +15,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () =>
-          fetch("https://coffee-shop-server-plum-theta.vercel.app/coffees"),
+        loader: () => fetch("http://localhost:3000/coffees"),
         hydrateFallbackElement: <Loading></Loading>,
         Component: Home,
       },
@@ -27,18 +26,14 @@ export const router = createBrowserRouter([
       {
         path: "/updateCoffee/:id",
         loader: ({ params }) =>
-          fetch(
-            `https://coffee-shop-server-plum-theta.vercel.app/coffees/${params.id}`
-          ),
+          fetch(`http://localhost:3000/coffees/${params.id}`),
         hydrateFallbackElement: <Loading></Loading>,
         Component: UpdateCoffee,
       },
       {
         path: "/coffees/:id",
         loader: ({ params }) =>
-          fetch(
-            `https://coffee-shop-server-plum-theta.vercel.app/coffees/${params.id}`
-          ),
+          fetch(`http://localhost:3000/coffees/${params.id}`),
         hydrateFallbackElement: <Loading></Loading>,
         Component: CoffeeDetails,
       },

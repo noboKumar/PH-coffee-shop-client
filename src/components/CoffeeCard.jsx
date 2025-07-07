@@ -10,6 +10,13 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
+// stripe import
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { CheckoutForm } from "./CheckOutForm/CheckoutForm";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+
 const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
   const { photo, name, quantity, supplier, price, _id } = coffee;
   const [isOpen, setIsOpen] = useState(false);
@@ -41,12 +48,9 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         // delete the coffee from db
-        fetch(
-          `https://coffee-shop-server-plum-theta.vercel.app/coffees/${_id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`http://localhost:3000/coffees/${_id}`, {
+          method: "DELETE",
+        })
           .then((res) => res.json())
           .then((data) => {
             console.log("after delete data", data);
@@ -169,17 +173,10 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
                 +
               </button>
             </div>
-            <div className="flex gap-4 py-4">
-              <button className="btn bg-green-800 px-10">
-                Pay ${totalBill}
-              </button>
-              <button
-                className="btn bg-red-800"
-                onClick={() => setIsOpen(false)}
-              >
-                Cancel
-              </button>
-            </div>
+            {/* Stripe form */}
+            <Elements stripe={stripePromise}>
+              <CheckoutForm setIsOpen={setIsOpen} totalBill={totalBill} />
+            </Elements>
           </DialogPanel>
         </div>
       </Dialog>

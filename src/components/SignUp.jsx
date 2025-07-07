@@ -20,7 +20,7 @@ const SignUp = () => {
         console.log(result.user);
 
         // send data to db
-        fetch("https://coffee-shop-server-plum-theta.vercel.app/users", {
+        fetch("http://localhost:3000/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

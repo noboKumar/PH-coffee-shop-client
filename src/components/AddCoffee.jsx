@@ -38,7 +38,7 @@ const AddCoffee = () => {
     newCoffee.photo = imageUrl;
 
     // send form data to db
-    fetch("https://coffee-shop-server-plum-theta.vercel.app/coffees", {
+    fetch("http://localhost:3000/coffees", {
       method: "POST",
       headers: {
         "content-type": "application/json",
