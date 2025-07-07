@@ -6,7 +6,7 @@ const CoffeeDetails = () => {
   const { details, name, photo, price, quantity, supplier, taste } =
     singleCoffeeData;
   return (
-    <div className="border-4 border-gray-400 space-y-2 my-20 w-3/10 mx-auto rounded-2xl px-12 py-6 text-center bg-slate-50">
+    <div className="border-4 border-gray-400 space-y-2 my-20 w-3/10 mx-auto rounded-2xl px-12 py-6 text-center">
       <img className="border-2 rounded-4xl mx-auto shadow-2xl" src={photo} alt="" />
       <h1 className="text-2xl font-semibold underline">{name}</h1>
       <div className="text-xl space-y-2">

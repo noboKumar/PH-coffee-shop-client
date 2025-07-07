@@ -1,5 +1,6 @@
 import React, { use } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router";
 
 const SignUp = () => {
   const { createUser } = use(AuthContext);
@@ -90,6 +91,12 @@ const SignUp = () => {
           placeholder="Password"
           name="password"
         />
+        <p className="text-lg">
+          Already have an account?{" "}
+          <Link to={"/signIn"} className="text-blue-500">
+            Log In
+          </Link>
+        </p>
 
         <button className="btn rounded-2xl bg-slate-500 text-white btn-neutral mt-4">
           Sign in

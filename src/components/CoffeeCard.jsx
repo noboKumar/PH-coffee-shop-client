@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import SpotlightCard from "./UI/SpotlightCard";
 import ShinyText from "./UI/ShinyText";
@@ -14,14 +14,17 @@ import {
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { CheckoutForm } from "./CheckOutForm/CheckoutForm";
+import { AuthContext } from "../context/AuthContext";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
+  const { user } = useContext(AuthContext);
   const { photo, name, quantity, supplier, price, _id } = coffee;
   const [isOpen, setIsOpen] = useState(false);
   const [quantityValue, setQuantityValue] = useState(1);
   const totalBill = price * quantityValue;
+  const navigate = useNavigate();
 
   const handleIncrement = () => {
     if (quantityValue < quantity) {
@@ -119,17 +122,21 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
             </button>
           </div>
         </div>
-        <button
-          onClick={() => setIsOpen(true)}
-          className="cursor-pointer bg-gray-900"
-        >
-          <ShinyText
-            text="Buy Now"
-            disabled={false}
-            speed={3}
-            className="border px-4 py-2 rounded text-xl"
-          />
-        </button>
+        {user && user.email ? (
+          <button
+            onClick={() => setIsOpen(true)}
+            className="cursor-pointer bg-gray-900"
+          >
+            <ShinyText
+              text="Buy Now"
+              disabled={false}
+              speed={3}
+              className="border px-4 py-2 rounded text-xl"
+            />
+          </button>
+        ) : (
+          <button onClick={()=> navigate("/login")}>Login to purchase</button>
+        )}
       </div>
       <Dialog
         open={isOpen}
