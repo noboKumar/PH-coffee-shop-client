@@ -3,7 +3,7 @@
 .active{
   @apply bg-gray-300
   text-black
-  rounded-2xl
+  rounded-xl
 }
 
 .shiny-text {
