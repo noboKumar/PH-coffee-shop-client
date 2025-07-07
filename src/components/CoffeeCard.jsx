@@ -135,7 +135,7 @@ const CoffeeCard = ({ coffee, coffeeData, setCoffeeData }) => {
             />
           </button>
         ) : (
-          <button onClick={()=> navigate("/login")}>Login to purchase</button>
+          <button className="btn btn-outline" onClick={()=> navigate("/signIn")}>Login to Buy</button>
         )}
       </div>
       <Dialog
